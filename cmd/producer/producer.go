@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"github.com/gin-gonic/gin"
-	"github.com/leonardo404-code/kafka-notify/config"
+	"github.com/leonardo404-code/kafka-notify/config/producer"
 	"github.com/leonardo404-code/kafka-notify/pkg/handler"
 	"github.com/leonardo404-code/kafka-notify/pkg/models"
 )
@@ -21,7 +21,7 @@ func main() {
 		{ID: 4, Name: "Lena"},
 	}
 
-	producer, err := config.SetupProducer()
+	producer, err := producer.SetupProducer()
 	if err != nil {
 		log.Fatalf("failed to initialize producer: %v", err)
 	}
