@@ -13,6 +13,15 @@ const (
 	ProducerPort = ":8080"
 )
 
+// @title Kafka Notify
+// @version 1.0
+// @description Basic real-time notification system using Kafka in Go.
+// @contact.name Leonardo Bispo
+// @contact.email leonardobispo.dev@gmail.com
+
+// @licence.name Apache 2.0
+
+// @host localhost:8080
 func main() {
 	users := []models.User{
 		{ID: 1, Name: "Emma"},

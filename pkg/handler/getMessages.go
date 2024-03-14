@@ -16,7 +16,15 @@ func getUserIDFromRequest(ctx *gin.Context) (string, error) {
 	return userID, nil
 }
 
-func HandleNotifications(ctx *gin.Context, store *models.NotificationStore) {
+// @Summary Get Notifications
+// @Description Get users notifications by UserID
+// @Router /{userID} [get]
+// @Param userID path string true "user ID for search by notifications"
+// @Produce json
+// @Success 200 {object} models.Notification
+// @Failure 404
+// @Failure 500
+func GetNotifications(ctx *gin.Context, store *models.NotificationStore) {
 	userID, err := getUserIDFromRequest(ctx)
 	if err != nil {
 		ctx.JSON(http.StatusNotFound, gin.H{"message": err.Error()})

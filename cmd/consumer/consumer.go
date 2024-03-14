@@ -29,7 +29,7 @@ func main() {
 	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
 	router.GET("/notifications/:userID", func(ctx *gin.Context) {
-		handler.HandleNotifications(ctx, store)
+		handler.GetNotifications(ctx, store)
 	})
 
 	fmt.Printf(

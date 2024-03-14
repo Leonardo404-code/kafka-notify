@@ -11,6 +11,17 @@ import (
 	"github.com/leonardo404-code/kafka-notify/pkg/models"
 )
 
+// @Summary Send Notifications
+// @Description send notification for users with kafka
+// @Router / [post]
+// @Param fromID body int true "user ID"
+// @Param toID body int true "user ID"
+// @Accept mpfd
+// @Produce json
+// @Success 200 {object} handler.SuccessResponse
+// @Failure 400
+// @Failure 404
+// @Failure 500
 func SendMessage(producer sarama.SyncProducer, users []models.User) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		fromID, err := getIDFromRequest(ctx, "fromID")
@@ -40,7 +51,7 @@ func SendMessage(producer sarama.SyncProducer, users []models.User) gin.HandlerF
 		}
 
 		ctx.JSON(http.StatusOK, gin.H{
-			"message": "Notification sent successfully!",
+			"message": "notification sent successfully!",
 		})
 	}
 }

@@ -1,0 +1,89 @@
+definitions:
+  handler.SuccessResponse:
+    properties:
+      message:
+        example: notification sent successfully!
+        type: string
+    type: object
+  models.Notification:
+    properties:
+      from:
+        $ref: '#/definitions/models.User'
+      message:
+        example: Jonh send message to you
+        type: string
+      to:
+        $ref: '#/definitions/models.User'
+    type: object
+  models.User:
+    properties:
+      id:
+        example: 1
+        type: integer
+      name:
+        example: John
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: leonardobispo.dev@gmail.com
+    name: Leonardo Bispo
+  description: Basic real-time notification system using Kafka in Go.
+  title: Kafka Notify
+  version: "1.0"
+paths:
+  /:
+    post:
+      consumes:
+      - multipart/form-data
+      description: send notification for users with kafka
+      parameters:
+      - description: user ID
+        in: body
+        name: fromID
+        required: true
+        schema:
+          type: integer
+      - description: user ID
+        in: body
+        name: toID
+        required: true
+        schema:
+          type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.SuccessResponse'
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Send Notifications
+  /{userID}:
+    get:
+      description: Get users notifications by UserID
+      parameters:
+      - description: user ID for search by notifications
+        in: path
+        name: userID
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Notification'
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Get Notifications
+swagger: "2.0"

@@ -10,12 +10,12 @@ import (
 
 type (
 	User struct {
-		Name string `json:"name,omitempty"`
-		ID   int    `json:"id,omitempty"`
+		Name string `json:"name,omitempty" example:"John"`
+		ID   int    `json:"id,omitempty" example:"1"`
 	}
 
 	Notification struct {
-		Message string `json:"message,omitempty"`
+		Message string `json:"message,omitempty" example:"Jonh send message to you"`
 		From    User   `json:"from,omitempty"`
 		To      User   `json:"to,omitempty"`
 	}
