@@ -23,10 +23,12 @@ func main() {
 	}
 
 	ctx, cancel := context.WithCancel(context.Background())
+
 	go consumer.SetupConsumerGroup(ctx, store)
 	defer cancel()
 
 	gin.SetMode(gin.ReleaseMode)
+
 	router := gin.Default()
 	router.GET("/notifications/:userID", func(ctx *gin.Context) {
 		handler.GetNotifications(ctx, store)
