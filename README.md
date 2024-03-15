@@ -23,8 +23,26 @@ Docker is a software platform that allows developers to create, deploy, and run 
 
 Inside root directory, run:
 
-```docker
+```shell
 docker compose -f ./config/docker/docker-compose.yaml
+```
+
+Check if the Kafka container is running
+```shell
+docker ps
+```
+
+You should see all containers running, like:
+
+![kafka containers](/docs/images/kafka-container-running.png)
+
+
+### Download project dependencies
+
+- Inside root project directory, run:
+
+```go
+go mod vendor
 ```
 
 ## Execute the project
@@ -35,11 +53,19 @@ docker compose -f ./config/docker/docker-compose.yaml
 go run cmd/producer/producer.go
 ```
 
-and
+You should see the log like:
+
+![kafka containers](/docs/images/producer.png)
+
+and in another terminal instance, run:
 
 ```go
 go run cmd/consumer/consumer.go
 ```
+
+You should see the log like:
+
+![kafka containers](/docs/images/consumer.png)
 
 This initializes the producer and consumer service respectively 
 
